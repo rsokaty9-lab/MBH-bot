@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marble Burger House Bot Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-dark text-white">
+    <div class="container-fluid">
+        <!-- Header -->
+        <nav class="navbar navbar-dark bg-primary mb-4">
+            <div class="container">
+                <span class="navbar-brand mb-0 h1">
+                    <i class="fas fa-hamburger me-2"></i>
+                    Marble Burger House Bot
+                </span>
+                <span class="navbar-text">
+                    <span id="status-indicator" class="badge bg-secondary">
+                        <i class="fas fa-circle me-1"></i>
+                        Connecting...
+                    </span>
+                </span>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="row">
+                <!-- Bot Status Card -->
+                <div class="col-md-6 mb-4">
+                    <div class="card bg-secondary">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Bot Status
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <strong>Status:</strong>
+                                    <span id="bot-status" class="badge bg-secondary">Loading...</span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <strong>Username:</strong>
+                                    <span id="bot-user">Loading...</span>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <strong>Guilds:</strong>
+                                    <span id="guild-count">Loading...</span>
+                                </div>
+                                <div class="col-sm-6">
+                                    <strong>Total Deployments:</strong>
+                                    <span id="total-deployments">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Commands Card -->
+                <div class="col-md-6 mb-4">
+                    <div class="card bg-secondary">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-terminal me-2"></i>
+                                Available Commands
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="command-item mb-3">
+                                <code>/deployment</code>
+                                <p class="text-muted mb-0">Create a deployment announcement with attendance tracking</p>
+                            </div>
+                            <div class="command-item mb-3">
+                                <code>/order</code>
+                                <p class="text-muted mb-0">Shopping cart system - add multiple items before checkout</p>
+                            </div>
+                            <div class="alert alert-info mb-0">
+                                <i class="fas fa-lightbulb me-2"></i>
+                                Use these slash commands in Discord for deployments and orders!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Last Deployment Card -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card bg-secondary">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-rocket me-2"></i>
+                                Last Deployment
+                            </h5>
+                        </div>
+                        <div class="card-body" id="last-deployment">
+                            <div class="text-center text-muted">
+                                <i class="fas fa-clock fa-2x mb-2"></i>
+                                <p>No deployments created yet</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instructions -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card bg-secondary">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">
+                                <i class="fas fa-question-circle me-2"></i>
+                                How to Use
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-primary">Deployment Command</h6>
+                                    <ol class="small">
+                                        <li>Type <code>/deployment</code> in Discord</li>
+                                        <li>Fill in the information:
+                                            <ul>
+                                                <li><strong>Host:</strong> Who is hosting</li>
+                                                <li><strong>Co-host:</strong> Who is co-hosting</li>
+                                                <li><strong>When:</strong> When it's scheduled</li>
+                                                <li><strong>Promotional:</strong> Yes/no</li>
+                                            </ul>
+                                        </li>
+                                        <li>Bot sends embed with role mention</li>
+                                        <li>Users react with ✅ for attendance</li>
+                                    </ol>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-success">Order Command</h6>
+                                    <ol class="small">
+                                        <li>Type <code>/order</code> in Discord</li>
+                                        <li>Select items and quantities from dropdowns</li>
+                                        <li>Click "Add to Cart" to add multiple items</li>
+                                        <li>Click "Confirm Order" when finished</li>
+                                        <li>Full menu available:
+                                            <ul class="small">
+                                                <li>Cheeseburger: $19.99</li>
+                                                <li>Deluxe Burger: $24.99</li>
+                                                <li>Bacon Burger: $22.99</li>
+                                                <li>Mushroom Burger: $27.99</li>
+                                                <li>French Fries: $8.99</li>
+                                                <li>Onion Rings: $10.99</li>
+                                                <li>Soda: $5.99</li>
+                                                <li>Milkshake: $9.99</li>
+                                            </ul>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
